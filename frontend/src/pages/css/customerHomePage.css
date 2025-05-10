@@ -1,0 +1,205 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2rem;
+  font-family: Arial, sans-serif;
+
+
+}
+
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 200px; /* shorter on small screens */
+  }
+
+  .slide-image {
+    height: 200px;
+  }
+
+  .hero-overlay {
+    bottom: 15px; /* bring it up slightly */
+    width: 90%; /* keep it inside the screen */
+    flex-direction: column; /* stack search bar items */
+    align-items: center;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .search-left, .search-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-input,
+  .search-select,
+  .search-button,
+  .reset-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+
+
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+/* Slideshow Container */
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Each image will stack on top of each other */
+.slide-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 0;
+}
+
+/* Only the active one is visible */
+.slide-image.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Optional: Overlay for search bar */
+.hero-overlay {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+
+/* 2. Search Bar */
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.search-left {
+  display: flex;
+  gap: 1.5rem;
+  flex-grow: 1;
+  min-width: 250px;
+}
+
+.search-right {
+  display: flex;
+  gap: 0.5rem;
+}
+
+
+.search-select,
+.search-input,
+.search-button,
+.reset-button {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+
+}
+
+.search-input{
+    height: 3px; /* match button/dropdown height */
+  
+  
+}
+
+
+.search-button,
+.reset-button {
+  background-color: #008060;
+  color: white;
+  border: none;
+  cursor: pointer;
+  
+
+}
+
+.reset-button {
+  background-color: #aaa;
+  
+}
+
+.search-button:hover,
+.reset-button:hover {
+  opacity: 0.85;
+}
+
+/* 3. Carousel Section */
+.carousel-section {
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem;
+}
+
+.carousel-section h2 {
+  margin-bottom: 1rem;
+}
+
+.chef-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+}
+
+.chef-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+.chef-carousel::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+/* 4. Chef Card */
+.chef-card {
+  flex: 0 0 320px; /* ~3 cards per row if container is ~1000px wide */
+  min-width: 200px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  text-align: center;
+}
+
+.chef-card:hover {
+  transform: translateY(-5px);
+}
+
+.chef-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}

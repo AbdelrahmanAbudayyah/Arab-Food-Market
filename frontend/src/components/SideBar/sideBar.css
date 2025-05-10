@@ -1,0 +1,79 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: auto;
+  background: #1a1a1a; /* Dark sidebar */
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.3);
+  padding: 80px 20px 20px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease, background 0.4s ease;
+  z-index: 2000;
+  overflow-y: auto;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+}
+
+.sidebar-menu li {
+  margin: 20px 0;
+  color: #b3b3b3; /* Gold text */
+
+}
+
+.sidebar-menu a {
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.sidebar-menu a:hover {
+  color: #FFC300; /* Slightly brighter gold on hover */
+}
+
+.sidebar-divider {
+  margin: 15px 0;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.location-filter {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.location-filter input {
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #FFD700;
+  background: #1a1a1a;
+  color: #FFD700;
+}
+
+.change-location-btn {
+  margin-top: 10px;
+  padding: 6px 10px;
+  background-color: #FFD700; /* Gold button */
+  color: #1a1a1a; /* Dark text */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.change-location-btn:hover {
+  background-color: #FFC300; /* Brighter gold hover */
+}

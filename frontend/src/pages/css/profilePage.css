@@ -1,0 +1,134 @@
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Change 0.4 to make it lighter or darker */
+  z-index: 1;
+}
+ 
+/* Full background image wrapper */
+.background-wrapper {
+  position: relative;
+  background-image: url('../../../public/images/arab.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+
+  min-height: 90.3vh;
+    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Or center, depending on desired placement */
+  padding-top: 100px;
+}
+
+/* Container just to center the card */
+.profile-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+  
+  .profile-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    background: rgba(255, 255, 255, 0.85); /* Slightly see-through */
+  backdrop-filter: blur(8px); /* Optional: adds a glass effect */
+  z-index: 3; /* Make sure it's above the overlay */
+
+  }
+  
+  .profile-section {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .profile-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    margin-bottom: 1rem;
+  }
+  
+  .profile-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .profile-bio {
+    font-style: italic;
+    color: #555;
+  }
+  
+  .profile-location {
+    color: #777;
+    font-size: 1rem;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  textarea {
+    resize: vertical;
+  }
+  
+  button {
+    margin: 0.3rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #3b873e;
+    color: rgb(223, 223, 223);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #213a22;
+  }
+  
+  button.cancel-btn {
+    background-color: #ccc;
+    color: #333;
+  }
+  
+  button.cancel-btn:hover {
+    background-color: #bbb;
+  }
+  
+  /* Specific for delete button */
+  .delete-account {
+    color: rgb(223, 223, 223);
+        background-color: rgb(147, 19, 19);
+  }
+  
+  .delete-account:hover {
+    background-color: rgb(43, 0, 0);
+  }
+  
