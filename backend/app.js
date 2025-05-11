@@ -8,17 +8,19 @@ const { generateToken} = require("./utils/jwt")
 
 const app = express();
 app.use(cookieParser());
+const path = require('path');
+
 
 // Middleware
 app.use(express.json()); // Parses incoming JSON requests
 app.use(cors({
-    origin: 'http://localhost:3000', // your frontend prod domain
+    origin: 'http://localhost', // your frontend prod domain
     credentials: true
   }));
   
 
 
-app.use('/uploads', express.static('uploads'));
+  app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));

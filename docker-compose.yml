@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # Frontend (React + Nginx)
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - arabfood-net  
+
+  # Backend (Node.js API)
+  backend:
+    build: ./backend
+    ports:
+      - "1800:1800"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./uploads:/app/uploads  
+    depends_on:
+      - mysql
+      - mongo
+    networks:
+      - arabfood-net  
+
+  # MySQL Database
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: abood123
+      MYSQL_DATABASE: arabfood
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/config/:/docker-entrypoint-initdb.d
+    networks:
+      - arabfood-net  
+
+  # MongoDB Database
+  mongo:
+    image: mongo:5
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: abood
+      MONGO_INITDB_ROOT_PASSWORD: abood123  
+    volumes:
+      - mongo_data:/data/db
+    networks:
+     - arabfood-net  
+
+volumes:
+  mysql_data:
+  mongo_data:
+
+networks:
+  arabfood-net:

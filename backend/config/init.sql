@@ -1,5 +1,6 @@
+/* create tables if they dont exist when running docker compose*/
 
-// users
+/* users */
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -12,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
     type ENUM('chef', 'customer') NOT NULL
 );
 
-//chefs
+/* chefs */
 
 CREATE TABLE IF NOT EXISTS chefs (
     user_id INT PRIMARY KEY,
@@ -23,7 +24,7 @@ CREATE TABLE IF NOT EXISTS chefs (
 );
 
 
-//customers
+/* customers */
 
 CREATE TABLE IF NOT EXISTS customers (
     user_id INT PRIMARY KEY,
@@ -31,7 +32,7 @@ CREATE TABLE IF NOT EXISTS customers (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-//followers 
+/* followers */ 
 
 CREATE TABLE IF NOT EXISTS followers (
     customer_id INT NOT NULL,
@@ -41,9 +42,23 @@ CREATE TABLE IF NOT EXISTS followers (
     FOREIGN KEY (chef_id) REFERENCES chefs(user_id) ON DELETE CASCADE
 );
 
+/* food items */ 
+
+CREATE TABLE IF NOT EXISTS food_items (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    chef_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    category VARCHAR(255) NOT NULL,
+
+    image_url VARCHAR(255) NULL,
+    FOREIGN KEY (chef_id) REFERENCES chefs(user_id) ON DELETE CASCADE
+);
 
 
-//orders
+
+/* orders */
 
 CREATE TABLE IF NOT EXISTS orders (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -56,14 +71,14 @@ CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (chef_id) REFERENCES chefs(user_id) ON DELETE CASCADE
 );
 
-//order items
+/* order items */
 
 CREATE TABLE IF NOT EXISTS order_food (
     order_id INT NOT NULL,
     food_id INT NOT NULL,
     quantity INT NOT NULL DEFAULT 1,
     food_name VARCHAR(255) NOT NULL,
-    food_price DECIMAL(10, 2) NOT NULL;
+    food_price DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY (order_id, food_id),
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
     FOREIGN KEY (food_id) REFERENCES food_items(id) ON DELETE CASCADE
@@ -71,73 +86,3 @@ CREATE TABLE IF NOT EXISTS order_food (
 
 
 
-//food items 
-
-CREATE TABLE IF NOT EXISTS food_items (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    chef_id INT NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    description TEXT NULL,
-    price DECIMAL(10,2) NOT NULL,
-    image_url VARCHAR(255) NULL,
-    FOREIGN KEY (chef_id) REFERENCES chefs(user_id) ON DELETE CASCADE
-);
-
-
-
-DELIMITER $$
-CREATE TRIGGER update_order_total_after_insert
-AFTER INSERT ON order_food
-FOR EACH ROW
-BEGIN
-    
-    UPDATE orders 
-    SET total = (
-        SELECT SUM(food_items.price * order_food.quantity)
-        FROM order_food
-        JOIN food_items ON order_food.food_id = food_items.id
-        WHERE order_food.order_id = NEW.order_id
-    )
-    WHERE id = NEW.order_id;
-END $$
-DELIMITER;
-
-
-DELIMITER $$
-
-CREATE TRIGGER update_order_total_after_update
-AFTER UPDATE ON order_food
-FOR EACH ROW
-BEGIN
-    IF OLD.quantity != NEW.quantity THEN
-        UPDATE orders 
-        SET total = (
-            SELECT SUM(food_items.price * order_food.quantity)
-            FROM order_food
-            JOIN food_items ON order_food.food_id = food_items.id
-            WHERE order_food.order_id = NEW.order_id
-        )
-        WHERE id = NEW.order_id;
-    END IF;
-END $$
-
-DELIMITER ;
-
-
-DELIMITER $$
-
-CREATE TRIGGER update_order_total_after_delete
-AFTER DELETE ON order_food
-FOR EACH ROW
-BEGIN
-    UPDATE orders 
-    SET total = (
-        SELECT SUM(food_items.price * order_food.quantity)
-        FROM order_food
-        JOIN food_items ON order_food.food_id = food_items.id
-        WHERE order_food.order_id = OLD.order_id
-    )
-    WHERE id = OLD.order_id;
-END $$
-
-DELIMITER ;

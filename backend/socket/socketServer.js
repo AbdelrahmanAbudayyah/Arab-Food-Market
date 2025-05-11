@@ -5,7 +5,7 @@ let io;
 function setupSocketIO(server) {
   io = new Server(server, {
     cors: {
-      origin: 'http://localhost:49267', // frontend port
+      origin: 'http://localhost', // frontend port
       credentials: true,
     }
   });

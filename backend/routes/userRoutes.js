@@ -2,15 +2,19 @@ const express=require('express');
 const {getChefsController,signUpUserController,getfollowingController,unfollowChefController,followChefController,getUserByIdController,updateUserBioController,updateUserAddressController,loginUserByEmailController,deleteUserController,updateUserNameController,updateUserPasswordController,updateUserImageController} = require('../controllers/userController');
 const authenticateUser = require("../middleware/authMiddleware");
 const multer= require('multer');
+const path = require('path');
 
-// Save file using multer diskStorage
+
 const storage = multer.diskStorage({
-    destination: 'uploads/',
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + '-' + file.originalname);
-    }
-  });
-  const upload = multer({ storage });
+  destination: (req, file, cb) => {
+    cb(null, './uploads'); // resolves to /app/uploads in container
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+const upload = multer({ storage });
 
 const router = express.Router();
 

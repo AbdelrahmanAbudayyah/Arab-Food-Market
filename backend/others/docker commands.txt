@@ -3,21 +3,21 @@ Docker commands
 mysql docker:
 
 run mysql image :  docker run --rm --name mysql-container -e MYSQL_ROOT_PASSWORD=YourNewPassword -d -p 3306:3306 --hostname mysqlimage mysql:8
-open mysql inside container : docker exec -it mysql-container mysql -u root -p
+open mysql inside container : docker exec -it arab-food-market-mysql-1 mysql -u root -p
 
 ///////////////////////////
 
 mongoDB docker:
 
-
-docker run -d --name arabfoodmongo -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=abood -e MONGO_INITDB_ROOT_PASSWORD=abood123 -v mongo-data:/data/db mongo
+docker run -d --name arabfoodmong
+o -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=abood -e MONGO_INITDB_ROOT_PASSWORD=abood123 -v mongo-data:/data/db mongo
 
 ///////////////////////////
 
 node.js docker:
 
  build docker image :  docker build -t node.js .
- run docker :          docker run --rm --name ass node.js
+ run docker :          docker run --rm --name anyname node.js
 
 ///////////////////////////
 
