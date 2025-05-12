@@ -16,15 +16,21 @@ const mysqlPool = mysql.createPool({
 });
 
 // Function to test MySQL connection
-const connectDB = async () => {
-    try {
-        const connection = await mysqlPool.getConnection();
-        console.log('✅ MySQL Connected');
-        connection.release(); // Release connection back to the pool
-    } catch (error) {
-        console.error('❌ MySQL Connection Error:', error);
-        process.exit(1);
+const connectDB = async (retries = 10, delay = 3000) => {
+    while (retries) {
+        try {
+            const connection = await mysqlPool.getConnection();
+            console.log('✅ MySQL Connected');
+            connection.release();
+            return;
+        } catch (err) {
+            console.error(`❌ MySQL connection failed. Retrying in ${delay / 1000}s...`, err.message);
+            retries--;
+            await new Promise(res => setTimeout(res, delay));
+        }
     }
+    console.error('❌ Could not connect to MySQL after multiple attempts. Exiting...');
+    process.exit(1);
 };
 
 module.exports = { connectDB, mysqlPool };
