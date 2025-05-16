@@ -22,6 +22,7 @@ export default function SignInModal({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage(''); // Clear previous errors
+    console.log('API URL:', process.env.REACT_APP_API_URL);
     try {
       const res = await axiosInstance.post('/users/login', formData,{
         withCredentials: true // so cookies get sent/stored
