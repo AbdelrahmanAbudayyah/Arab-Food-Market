@@ -276,7 +276,7 @@ const [confirming, setConfirming] = useState(false);
           <img
             src={
               userDetails?.image_url
-                ? `http://localhost:1800${userDetails.image_url}`
+                ? `${process.env.REACT_APP_API_URL}${userDetails.image_url}`
                 : '/default-profile.png'
             }
             alt="Profile"

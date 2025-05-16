@@ -14,7 +14,7 @@ const path = require('path');
 // Middleware
 app.use(express.json()); // Parses incoming JSON requests
 app.use(cors({
-    origin: 'http://18.221.59.59', // your frontend prod domain
+    origin: process.env.FRONTEND_URL, // your frontend prod domain
     credentials: true
   }));
   

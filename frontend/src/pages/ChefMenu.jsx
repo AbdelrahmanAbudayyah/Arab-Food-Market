@@ -150,7 +150,7 @@ export default function ChefMenu() {
         <div className="chef-info">
           {chef.image_url && <img src={
                       chef?.image_url
-                ? `http://localhost:1800${chef.image_url}`
+                ? `${process.env.REACT_APP_API_URL}${chef.image_url}`
                 : '/default-profile.png'} alt="Chef" className="chef-image" />}
           <h2>{chef.name}</h2>
           <p className="chef-bio">{chef.bio}</p>
@@ -176,7 +176,7 @@ export default function ChefMenu() {
               <img
                 src={
                   item.image_url
-                    ? `http://localhost:1800${item.image_url}`
+                    ? `${process.env.REACT_APP_API_URL}${item.image_url}`
                     : '/default-profile.png'
                 }
                 alt={item.name}
@@ -211,7 +211,7 @@ export default function ChefMenu() {
            <div className="food-item-details">
              {item.image_url && (
                <img
-                 src={item?.image_url ? `http://localhost:1800${item.image_url}` : '/default-profile.png'}
+                 src={item?.image_url ? `${process.env.REACT_APP_API_URL}${item.image_url}` : '/default-profile.png'}
                  alt={item.name}
                  className="food-img"
                />

@@ -8,7 +8,7 @@ import './css/messagesPage.css'
 import axiosInstance from'../axiosInstance';
 import { useParams } from 'react-router-dom';
 
-const SOCKET_URL = 'http://localhost:1800'; // change to your backend UR
+const SOCKET_URL = process.env.REACT_APP_API_URL; // change to your backend UR
 
 export default function MessagesPage(){
 

@@ -179,7 +179,7 @@ export default function CustomerHomePage() {
                 <img
                   src={
                     chef?.image_url
-                      ? `http://localhost:1800${chef.image_url}`
+                      ? `${process.env.REACT_APP_API_URL}${chef.image_url}`
                       : '/default-profile.png'
                   }
                   alt={chef.name}
@@ -213,7 +213,7 @@ export default function CustomerHomePage() {
                 <img
                   src={
                     chef?.image_url
-                      ? `http://localhost:1800${chef.image_url}`
+                      ? `${process.env.REACT_APP_API_URL}${chef.image_url}`
                       : '/default-profile.png'
                   }
                   alt={chef.name}

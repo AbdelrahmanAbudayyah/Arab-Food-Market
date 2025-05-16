@@ -223,7 +223,7 @@ const handleEditClick = (item) => {
             <img
               src={
                 chef.image_url
-                  ? `http://localhost:1800${chef.image_url}`
+                  ? `${process.env.REACT_APP_API_URL}${chef.image_url}`
                   : '/default-profile.png'
               }
               alt="Chef"
@@ -274,7 +274,7 @@ const handleEditClick = (item) => {
               <img
                 src={
                   item.image_url
-                    ? `http://localhost:1800${item.image_url}`
+                    ? `${process.env.REACT_APP_API_URL}${item.image_url}`
                     : '/default-profile.png'
                 }
                 alt={item.name}

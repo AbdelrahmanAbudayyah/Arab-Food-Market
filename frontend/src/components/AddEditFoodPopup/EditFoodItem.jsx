@@ -60,7 +60,7 @@ const EditFoodModal = ({ show, closeModal, handleUpdateFoodItem, foodItem, handl
                     foodItem.image_url && typeof foodItem.image_url === 'object'
                       ? URL.createObjectURL(foodItem.image_url)
                       : foodItem.image_url
-                        ? `http://localhost:1800${foodItem.image_url}`
+                        ? `${process.env.REACT_APP_API_URL}${foodItem.image_url}`
                         : '/default-placeholder.png' // your default image
                   }
                   alt="Food preview"
