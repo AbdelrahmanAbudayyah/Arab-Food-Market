@@ -17,35 +17,35 @@ Arab Food Market is a full-stack web app that helps Arab home chefs in the U.S. 
 🧱 Tech Stack
 
 Frontend:
-React
-Axios
-Socket.IO (for real-time messaging)
+- React
+- Axios
+- Socket.IO (for real-time messaging)
 
 
 Backend:
-Node.js
-Express.js
-JWT for authentication
-Bcrypt for password hashing
-Socket.IO (for real-time messaging)
+- Node.js
+- Express.js
+- JWT for authentication
+- Bcrypt for password hashing
+- Socket.IO (for real-time messaging)
 
 
 Database:
-MySQL (for users, orders, etc.)
-MongoDB (for messages)
+- MySQL (for users, orders, etc.)
+- MongoDB (for messages)
 
 DevOps & Tools:
-Docker
-Git & GitHub
-Postman (for API testing)
+- Docker
+- Git & GitHub
+- Postman (for API testing)
 
 Testing:
-Jest
-Supertest
-Cypress
+- Jest
+- Supertest
+- Cypress
 
 Deployment:
-AWS EC2
+- AWS EC2
 
 🛠️ Installation
 
