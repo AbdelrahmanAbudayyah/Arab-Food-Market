@@ -217,6 +217,7 @@
   .hero-section {
     height: 180px; /* slightly shorter for iPhone Pro Max */
   }
+  
 
   .slide-image {
     height: 180px;
@@ -254,5 +255,9 @@
     padding: 0.5rem;
     font-size: 0.9rem;
     margin-right: 10px; /* spacing between cards */
+  }
+
+  .chef-carousel {
+    justify-content: flex-start;
   }
 }
