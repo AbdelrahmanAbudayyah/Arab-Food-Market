@@ -250,9 +250,9 @@
   }
 
   .chef-card {
-    flex: 0 0 95%;      /* Nearly full width on very small screens */
-    padding: 0.6rem;
+    flex: 0 0 160px;  /* Fixed width so multiple cards can fit side by side */
+    padding: 0.5rem;
     font-size: 0.9rem;
-
+    margin-right: 10px; /* spacing between cards */
   }
 }
