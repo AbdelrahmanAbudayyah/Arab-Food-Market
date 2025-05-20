@@ -151,4 +151,39 @@
 }
 
 
+@media (max-width: 768px) {
+  .welcome-text {
+    top: 10%;
+    left: 20px;
+    max-width: 90%;
+  }
+
+  .welcome-text h1 {
+    font-size: 2rem;
+  }
+
+  .welcome-text p {
+    font-size: 1rem;
+  }
+
+  .modal {
+    padding: 1rem;
+    max-width: 90%;
+  }
+
+  .modal p {
+    font-size: 1.5rem;
+  }
+
+  .modal input,
+  .modal-buttons button {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .guest-button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
 
