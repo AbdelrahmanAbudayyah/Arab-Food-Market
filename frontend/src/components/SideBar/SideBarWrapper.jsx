@@ -1,10 +1,9 @@
 import LoggedOutSideBar from './LogedOutSideBar';
 import LoggedInSideBar from './LogedInSideBar';
-import { useAuth } from '../../contexts/AuthContext'; // Adjust the path to where your context is
+import { useAuth } from '../../contexts/AuthContext';
 
-// Simulate login state. Replace with real logic.
 export default function SideBarWrapper({ sidebarOpen, setSidebarOpen }) {
-    const { user } = useAuth(); // This gives you access to the user state
+    const { user } = useAuth(); 
   
     return user ? (
       <LoggedInSideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />

@@ -9,7 +9,7 @@ const messageSchema = new Schema(
     senderId: { type: String },
     conversationId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Conversation', // Reference to the Conversation model
+      ref: 'Conversation',
       required: true,
     },
     content: {
@@ -17,7 +17,7 @@ const messageSchema = new Schema(
       required: true,
     },
   },
-  { timestamps: true } // Automatically adds createdAt and updatedAt fields
+  { timestamps: true }
 );
 
 module.exports = mongoose.model('Message', messageSchema);

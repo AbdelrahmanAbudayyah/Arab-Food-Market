@@ -1,6 +1,5 @@
 const {mysqlPool} = require('../config/mysql-db');
 
-
 // a chef can add food item to his menu 
 const addFoodItem=async(userId,foodData)=>{
     const{name, description,price,image_url,category}=foodData;
@@ -29,27 +28,22 @@ const deleteFoodItem=async(foodId)=>{
 const updateFoodItem=async(foodId,foodData)=>{
     const{name, description,price,image_url,category}=foodData;
     try{
-
-        if(image_url)
+    if(image_url)
        await mysqlPool.query('UPDATE food_items SET name = ?, description = ?, price = ?, image_url = ?, category = ? WHERE id = ?',[name,description,price,image_url,category,foodId]);
     else
-    await mysqlPool.query('UPDATE food_items SET name = ?, description = ?, price = ?, category = ? WHERE id = ?',[name,description,price,category,foodId]);
+        await mysqlPool.query('UPDATE food_items SET name = ?, description = ?, price = ?, category = ? WHERE id = ?',[name,description,price,category,foodId]);
 
-
-        return {message:'food updated successfully'};
+    return {message:'food updated successfully'};
 
     }catch(error){
         console.error("MySQL Error in update foodModel:", error);
         throw new Error("error in updating food model");  }
 };
 
-
 // get all food items for one cheff 
 const getAllFoodItemsByChef=async(id)=>{
-    
     try{
        const [result]= await mysqlPool.query('select * from food_items WHERE chef_id = ?',[id]);
-       console.log(result);
         return result;
 
     }catch(error){
@@ -59,7 +53,6 @@ const getAllFoodItemsByChef=async(id)=>{
 
 // get one food item by item id
 const getFoodItemById=async(id)=>{
-    
     try{
        const [result]= await mysqlPool.query('select * from food_items WHERE id = ?',[id]);
         return result;

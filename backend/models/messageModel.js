@@ -11,11 +11,8 @@ const createOrGetConversation = async(senderId,receiverId) => {
     });
 
     // If it exists, return it
-    if (conversation) {
-       
-        return { status: 200, conversation};
-      }
-
+    if (conversation)  return { status: 200, conversation};
+    
     // If not, create new conversation
     conversation = new Conversation({
       participants: [senderId, receiverId]
@@ -48,12 +45,10 @@ const sendMessage = async(senderId,conversationId,content) => {
     }
   };
 
-
   const getMessages= async (conversationId)=>{
     try {
         const messages = await Message.find({ conversationId: conversationId });
-
-    return(messages);
+        return(messages);
 
         } catch (err) {
         console.error('Error getting messages:', err);
@@ -82,7 +77,7 @@ const sendMessage = async(senderId,conversationId,content) => {
         allParticipantIds
       );
 
-      const userMap = {};
+    const userMap = {};
     rows.forEach(row => {
       userMap[row.id] = row.name;
     });
@@ -104,13 +99,6 @@ const sendMessage = async(senderId,conversationId,content) => {
       throw new Error('Error fetching conversations');
     }
   };
-
-
-
-
-
-
-
 
 module.exports = { createOrGetConversation,sendMessage,getMessages,getAllConversations };
 

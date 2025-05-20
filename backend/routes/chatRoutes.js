@@ -4,10 +4,6 @@ const authenticateUser = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-
-
-
-
 router.post('/conversation',authenticateUser ,createOrGetConversationController);  // POST /api/chat/conversation - get or create conversation if none exist
 router.post('/message',authenticateUser ,sendMessageController);  // POST /api/chat/message - send a message
 

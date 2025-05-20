@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useGuest } from '../contexts/GuestContext';
 import { useAuth } from '../contexts/AuthContext';
-
-
 import './css/welcomePage.css';
-
 
 export default function WelcomePage() {
   const [showModal, setShowModal] = useState(false);
@@ -13,7 +10,6 @@ export default function WelcomePage() {
   const { guestBrowse } = useGuest();
   const { user } = useAuth();
 
-  
   const handleGuestContinue = () => {
     guestBrowse({ state: stateInput, city: cityInput });
   };

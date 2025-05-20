@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './css/becomeAChefModal.css';
 import { IoClose } from 'react-icons/io5';
-import { useAuth } from '../../contexts/AuthContext'; // Make sure the path is correct
+import { useAuth } from '../../contexts/AuthContext'; 
 import axiosInstance from'../../axiosInstance';
 
 export default function BecomeAChefModal({ isOpen, onClose }) {
@@ -20,7 +20,7 @@ export default function BecomeAChefModal({ isOpen, onClose }) {
   });
 
   const [imageFile, setImageFile] = useState(null);
-  const { login } = useAuth(); // Get login function from context
+  const { login } = useAuth(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,27 +47,25 @@ export default function BecomeAChefModal({ isOpen, onClose }) {
     const data = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
       if (key === 'additionalData') {
-        data.append(key, JSON.stringify(value)); // serialize the object
+        data.append(key, JSON.stringify(value)); 
       }else{
       data.append(key, value);
       }
     });
 
     if (imageFile) {
-      data.append('image_url', imageFile); // Adjust key if your backend expects a different name
+      data.append('image_url', imageFile); 
     }
 
     try {
-      console.log(data);
       const res = await axiosInstance.post('/users/signup', data,{
-        withCredentials: true // so cookies get sent/stored
+        withCredentials: true 
       });
-      const { token, user } = res.data; // Assuming backend sends both
+      const { token, user } = res.data; 
 
-      // Save user data (or just token, up to you)
+    
       login({ token, ...user });
-      console.log('User signed up:', res.data);
-      onClose(); // close modal on success
+      onClose(); 
     } catch (err) {
       console.error('Signup error:', err.response?.data || err.message);
     }

@@ -13,8 +13,6 @@ const addFoodItemController = async(req,res)=>{
 
         validateFoodData(foodData);
         const result = await addFoodItem(id,foodData);
-        console.log(result.foodId);
-
         res.status(200).json({message:result.message,id:result.foodId});
     }catch(error){
         console.error(error);
@@ -25,8 +23,6 @@ const addFoodItemController = async(req,res)=>{
 // Controller to handle HTTP DELETE for deleting a food item
 const deleteFoodItemController = async(req,res)=>{
     const {foodId}=req.params;
-   // const {id}=req.user;
-
     try{
         const [foodItem]= await getFoodItemById(foodId);
         if(!foodItem){
@@ -49,12 +45,10 @@ const updateFoodItemController = async(req,res)=>{
         image_url,
       };
     try{
-        console.log("image_url;",image_url);
         const [foodItem]= await getFoodItemById(foodId);
         if(!foodItem){
             return res.status(404).json({message:"food id doesnot exist"});
         }
-
         validateFoodData(foodData);
         const result = await updateFoodItem(foodId,foodData);
         res.status(200).json({message:result.message});
@@ -66,7 +60,6 @@ const updateFoodItemController = async(req,res)=>{
 
 // Controller to handle HTTP GET for getting all food items for chef
 const getFoodItemController = async(req,res)=>{
-    
     const {chefId}=req.params;
     try{
         if(!chefId)
@@ -78,9 +71,5 @@ const getFoodItemController = async(req,res)=>{
         res.status(500).json({message:error.message});
     }
 };
-
-
-
-
 
 module.exports={addFoodItemController,deleteFoodItemController,updateFoodItemController,getFoodItemController};

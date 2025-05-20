@@ -18,14 +18,11 @@ app.use(cors({
     credentials: true
   }));
   
-
-
-  app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/foodItems', require('./routes/foodItemsRoutes'));
-
 app.use('/api/orders', require('./routes/ordersRoutes'));
 app.use('/api/chat', require('./routes/chatRoutes'));
 

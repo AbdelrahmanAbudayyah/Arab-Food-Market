@@ -15,11 +15,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
 const router = express.Router();
-
-// http://localhost:
-
 
 router.post('/signup',upload.single('image_url'),signUpUserController);    // POST /api/users/signup - Create a new user
 router.post('/login',loginUserByEmailController); // POST /api/users/login - login

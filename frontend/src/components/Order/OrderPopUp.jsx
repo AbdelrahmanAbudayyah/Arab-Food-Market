@@ -16,7 +16,6 @@ export default function OrderPopup({ show, closeModal, order, handleStatus }) {
   return (
     <div className="popup-overlay">
       <div className="popup-content">
-        {/* Close (Exit) Button */}
         <button className="close-btn" onClick={closeModal}>X</button>
         
         <h2>Order #{order.id}</h2>

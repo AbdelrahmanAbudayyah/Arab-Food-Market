@@ -4,7 +4,6 @@ const {mysqlPool} = require('../config/mysql-db');
 const bcrypt = require('bcrypt');
 
 
-
 router.post('/seed', async (req, res) => {
     console.log('inside test seed');
     try {
@@ -44,14 +43,12 @@ await mysqlPool.query(
     `INSERT INTO customers (user_id) VALUES (?)`,
     [customerResult.insertId]
   );
-    
         res.sendStatus(201);
       } catch (err) {
         console.error(err);
         res.sendStatus(500);
       }
     });
-  
   
   router.post('/cleanup', async (req, res) => {
     try {

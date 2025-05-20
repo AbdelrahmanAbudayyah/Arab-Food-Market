@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './css/signInModal.css';
 import { IoClose } from 'react-icons/io5';
-//import axios from 'axios';
-import { useAuth } from '../../contexts/AuthContext'; // Make sure the path is correct
+import { useAuth } from '../../contexts/AuthContext'; 
 import axiosInstance from'../../axiosInstance';
 
 export default function SignInModal({ isOpen, onClose }) {
@@ -10,7 +9,7 @@ export default function SignInModal({ isOpen, onClose }) {
     email: '',
     password: '',
   });
-  const { login } = useAuth(); // Get login function from context
+  const { login } = useAuth();
   const [errorMessage, setErrorMessage] = useState('');
 
 
@@ -21,22 +20,15 @@ export default function SignInModal({ isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(''); // Clear previous errors
-    console.log('API URL:', process.env.REACT_APP_API_URL);
+    setErrorMessage(''); 
     try {
       const res = await axiosInstance.post('/users/login', formData,{
-        withCredentials: true // so cookies get sent/stored
+        withCredentials: true 
       });
-      //const { token, user } = res.data; // Assuming backend sends both
-      const {user } = res.data; // Assuming backend sends both
-
-      console.log(user);
-
-      // Save user data (or just token, up to you)
-      //login({ token, ...user });
+      const {user } = res.data; 
       login({...user });
 
-      onClose(); // Close modal
+      onClose();
     } catch (err) {
       const msg = err.response?.data?.message || 'Something went wrong';
       console.error('Login error:',msg);

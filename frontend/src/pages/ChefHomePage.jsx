@@ -3,8 +3,8 @@ import { useAuth } from '../contexts/AuthContext';
 
 import axiosInstance from'../axiosInstance';
 import './css/chefHomePage.css';
-import AddFoodModal from '../components/AddEditFoodPopup/AddFoodItem'; // Import the Modal component
-import EditFoodModal from '../components/AddEditFoodPopup/EditFoodItem'; // Import the Modal component
+import AddFoodModal from '../components/AddEditFoodPopup/AddFoodItem'; 
+import EditFoodModal from '../components/AddEditFoodPopup/EditFoodItem'; 
 
 export default function ChefPage() {
   const [foodItems, setFoodItems] = useState([]);
@@ -29,24 +29,22 @@ export default function ChefPage() {
     category:'main'
 
   });
-  const [isEditing, setIsEditing] = useState(false); // New state to toggle edit mode
-  const [isAddFoodModalVisible, setIsAddFoodModalVisible] = useState(false); // State to control modal visibility
-  const [isEditFoodModalVisible, setIsEditFoodModalVisible] = useState(false); // State to control modal visibility
-
+  const [isEditing, setIsEditing] = useState(false); 
+  const [isAddFoodModalVisible, setIsAddFoodModalVisible] = useState(false); 
+  const [isEditFoodModalVisible, setIsEditFoodModalVisible] = useState(false);
   useEffect(() => {
     fetchChefDetails();
   }, [user]);
 
   const fetchChefDetails = async () => {
     try {
-      console.log(user.id);
       const res1 = await axiosInstance.get(`/users/user/${user.id}`,{
-        withCredentials: true // so cookies get sent/stored
+        withCredentials: true 
       });
       setChef(res1.data);
 
       const res2 = await axiosInstance.get(`/foodItems/get/${user.id}`,{
-        withCredentials: true // so cookies get sent/stored
+        withCredentials: true 
       });
       setFoodItems(res2.data);
     } catch (err) {
@@ -59,25 +57,19 @@ export default function ChefPage() {
     formData.append('name', foodItem.name);
     formData.append('description', foodItem.description);
     formData.append('price', foodItem.price);
-    formData.append('image_url', foodItem.image_url); // assuming this is a File object
-    formData.append('chef_id', user.id); // if required by backend
+    formData.append('image_url', foodItem.image_url); 
+    formData.append('chef_id', user.id); 
     formData.append('category', foodItem.category); 
 
-
     try{
-    
     const res = await axiosInstance.post('/foodItems/add', formData, {
       withCredentials: true,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
 
-    console.log("res:",res);
-    console.log("res.data",res.data);
-
-     const newFoodItem = { ...foodItem, id: res.data.id};  // Combine the returned id with the existing food data
-              
+    const newFoodItem = { ...foodItem, id: res.data.id};  // Combine the returned id with the existing food data
     setFoodItems(prev => [...prev, newFoodItem]); // res.data should be the newly created food item
-    setIsAddFoodModalVisible(false); // Close the modal after adding food
+    setIsAddFoodModalVisible(false);
 
 
     }catch (err) {
@@ -89,18 +81,14 @@ export default function ChefPage() {
                 withCredentials: true,
                 headers: { 'Content-Type': 'multipart/form-data' },
               });
-              console.log("res:",res);
-              console.log("res.data",res.data);
-              
               const newFoodItem = { ...foodItem, id: res.data.id,chef_Id:user.id };  // Combine the returned id with the existing food data
               
               setFoodItems(prev => [...prev,newFoodItem ]); // res.data should be the newly created food item
-              setIsAddFoodModalVisible(false); // Close the modal after adding food
+              setIsAddFoodModalVisible(false); 
 
            
           } catch (refreshError) {
             console.error('Token refresh failed or retry failed:', refreshError);
-            // Optionally: log out user or redirect to login
           }
         } else {
           console.error('update error:', err);
@@ -130,7 +118,6 @@ export default function ChefPage() {
                
               } catch (refreshError) {
                 console.error('Token refresh failed or retry failed:', refreshError);
-                // Optionally: log out user or redirect to login
               }
             } else {
               console.error('delete error:', err);
@@ -143,13 +130,11 @@ export default function ChefPage() {
     formData.append('name', foodItem.name);
     formData.append('description', foodItem.description);
     formData.append('price', foodItem.price);
-    formData.append('chef_id', user.id); // if required by backend
-    formData.append('category', foodItem.category); // if required by backend
+    formData.append('chef_id', user.id); 
+    formData.append('category', foodItem.category);
     if (foodItem.image_url instanceof File) {
       formData.append('image_url', foodItem.image_url);
     }
-
-
             try{
                 const res =await axiosInstance.put(`/foodItems/put/${foodItem.id}`,formData,{
                     withCredentials: true
@@ -160,7 +145,6 @@ export default function ChefPage() {
                     item.id === foodItem.id ? foodItem : item
                     )
                 );
-                console.log("foodItems",foodItems);
             }catch (err) {
                 if (err.response?.status === 401) {
                     try{
@@ -182,7 +166,6 @@ export default function ChefPage() {
                    
                   } catch (refreshError) {
                     console.error('Token refresh failed or retry failed:', refreshError);
-                    // Optionally: log out user or redirect to login
                   }
                 } else {
                   console.error('delete error:', err);
@@ -195,7 +178,7 @@ export default function ChefPage() {
                 if (name === 'image_url') {
                   setFoodItem((prev) => ({
                     ...prev,
-                    image_url: files[0], // this will be a File object
+                    image_url: files[0], 
                   }));
                 } else {
                   setFoodItem(prev => ({ ...prev, [name]: value }));
@@ -203,16 +186,16 @@ export default function ChefPage() {
               };
   const toggleAddFoodModalModal = () => {
                setFoodItem(initialFoodItem);
-                setIsAddFoodModalVisible(!isAddFoodModalVisible); // Toggle modal visibility
+                setIsAddFoodModalVisible(!isAddFoodModalVisible); 
               };
 
  const toggleEditFoodModalModal = () => {
-   setIsEditFoodModalVisible(!isEditFoodModalVisible); // Toggle modal visibility
+   setIsEditFoodModalVisible(!isEditFoodModalVisible); 
                };         
 
 const handleEditClick = (item) => {
-    setFoodItem(item); // 👈 this is the item the user clicked "Edit" on
-    setIsEditFoodModalVisible(true); // opens the modal
+    setFoodItem(item); 
+    setIsEditFoodModalVisible(true);
   };
    
   return (

@@ -1,9 +1,8 @@
 import './sideBar.css';
 import { useRef, useEffect,useState } from 'react';
-import SignInModal from '../LoginSignupPopup/SignInModal'; // Adjust path if needed
-import SignUpModal from '../LoginSignupPopup/SignUpModal'; // Adjust path if needed
+import SignInModal from '../LoginSignupPopup/SignInModal'; 
+import SignUpModal from '../LoginSignupPopup/SignUpModal';
 import BecomeAChefModal from '../LoginSignupPopup/BecomeAChefModal';
-
 
 export default function LoggedOutSideBar({ sidebarOpen, setSidebarOpen }) {
   const sidebarRef = useRef(null);
@@ -11,19 +10,18 @@ export default function LoggedOutSideBar({ sidebarOpen, setSidebarOpen }) {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showBecomeChef, setShowBecomeChef] = useState(false);
 
-
   const handleSignInClick = () => {
     setShowSignIn(true);
-    setSidebarOpen(false); // Optional: close sidebar when opening modal
+    setSidebarOpen(false);
   };
 
   const handleSignUpClick = () => {
     setShowSignUp(true);
-    setSidebarOpen(false); // Optional: close sidebar when opening modal
+    setSidebarOpen(false);
   };
   const handleBecomeChefClick = () => {
     setShowBecomeChef(true);
-    setSidebarOpen(false); // Optional: close sidebar when opening modal
+    setSidebarOpen(false); 
   };
 
   useEffect(() => {

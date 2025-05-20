@@ -4,13 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import axiosInstance from'../../axiosInstance';
 
-
 export default function LoggedInSideBar({ sidebarOpen, setSidebarOpen }) {
   const sidebarRef = useRef(null);
   const navigate = useNavigate();
-  const { user,logout} = useAuth(); // ✅ Get logout from context
+  const { user,logout} = useAuth(); 
 
- 
   useEffect(() => {
     function handleClickOutside(event) {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -38,7 +36,7 @@ export default function LoggedInSideBar({ sidebarOpen, setSidebarOpen }) {
 
   const handleNavigation = (path) => {
     navigate(path);
-    setSidebarOpen(false); // Close sidebar after navigation
+    setSidebarOpen(false); 
   };
 
   return (

@@ -6,12 +6,9 @@ const {validateSignUpInput,validateIfUserExist}= require("../utils/validateInput
 
 // Controller to handle HTTP POST for creating User
 const signUpUserController = async(req,res)=>{
-   // console.log(req.file);
  
-
 const { name, email, password, state, city,type} = req.body;
 const additionalData = JSON.parse(req.body.additionalData || '{}');
-
 const image_url = req.file ? `/uploads/${req.file.filename}` : null;
 try{
     validateSignUpInput({ name, email, password, state, city, image_url, type });
@@ -55,7 +52,6 @@ res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: false, sameSi
                      additionalData:user.userData.additionalData
                 }
         }
-    
     );
 }
 catch(error){
@@ -63,7 +59,6 @@ catch(error){
     res.status(500).json({message:error.message}); 
 }
 };
-
 // Controller to handle HTTP POST for login exisitng User
 const loginUserByEmailController = async(req,res)=>{
     const{email,password}=req.body;
@@ -117,24 +112,19 @@ const deleteUserController = async(req,res)=>{
     const userId = req.user.id; 
     const {password} = req.body;
     try{
-
-
         if(!userId)
             return res.status(404).json({message:'id is invalid'});
-
         if(!password)
             return res.status(404).json({message:'password is missing'});
 
         const userPassword = await getUserPassword(userId);
-        //
+
         // Compare entered password with hashed password
          const isMatch = await bcrypt.compare(password, userPassword);
          if (!isMatch) {
              return res.status(400).json({ message: 'Password is incorrect' });
          }
-
         const result = await deleteUser(userId);
-
         if(!result.success){
             return res.status(404).json({ message: result.message });
         }
@@ -169,7 +159,6 @@ const updateUserNameController = async(req,res)=>{
 const updateUserImageController = async(req,res)=>{
     const image_url = req.file ? `/uploads/${req.file.filename}` : null;
     const {id}=req.user;
-    console.log("image_url;",image_url);
 
     try{
         if(!id)
@@ -201,7 +190,6 @@ const updateUserAddressController = async(req,res)=>{
 const updateUserBioController = async(req,res)=>{
     const {bio}=req.body;
     const {id}=req.user;
-
     try{
         if(!id)
             return res.status(404).json({message:'id is invalid'});
@@ -235,7 +223,6 @@ const updateUserPasswordController = async(req,res)=>{
         if (!isMatch) {
             return res.status(400).json({ message: 'Password is incorrect' });
         }
-
         // Hash the new password
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
@@ -252,7 +239,6 @@ const updateUserPasswordController = async(req,res)=>{
 const followChefController = async(req,res)=>{
     const {chefId}=req.params;
     const userId = req.user.id;
-    //console.log("userId from cookie:",userId);
     try{
         if(!userId)
             return res.status(404).json({message:'user id is invalid'});
@@ -337,6 +323,5 @@ const getUserByIdController = async(req,res)=>{
             res.status(500).json({message:error.message}); 
         }
         };    
-
 
 module.exports={getChefsController,signUpUserController,getfollowingController,unfollowChefController,followChefController,getUserByIdController,updateUserAddressController,updateUserBioController,updateUserPasswordController,loginUserByEmailController,deleteUserController,updateUserNameController,updateUserImageController};

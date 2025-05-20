@@ -5,10 +5,6 @@ import './css/profilePage.css';
 
 export default function ProfilePage() {
   const { user,setUser,logout } = useAuth();
- 
-  
-  //const id = user.id;
-
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [pageEditMode, setPageEditMode] = useState(false);
@@ -26,9 +22,6 @@ const [passwordData, setPasswordData] = useState({
 });
 const [password, setPassword] = useState('');
 const [confirming, setConfirming] = useState(false);
-
-
-
 
   useEffect(() => {
     if (user) {
@@ -65,11 +58,7 @@ const [confirming, setConfirming] = useState(false);
       return;
     }
     try {
-      console.log("inside handle save");
-      console.log("tempDetails",tempDetails)
-
       const updated = { ...userDetails, [field]: tempDetails[field] };
-
       // If editing address (city/state together)
       if (field === 'address') {
         updated.city = tempDetails.city;
@@ -85,27 +74,19 @@ const [confirming, setConfirming] = useState(false);
     } catch (err) {
         if (err.response?.status === 401) {
           try {
-            // Try refreshing token
             await axiosInstance.post('/refresh-token', {}, { withCredentials: true });
-            
             const updated = { ...userDetails, [field]: tempDetails[field] };
-
-            // If editing address (city/state together)
             if (field === 'address') {
                 updated.city = tempDetails.city;
                 updated.state = tempDetails.state;
             }
-
             await axiosInstance.put(`/users/put/${field}`, updated, {
                 withCredentials: true,
             });
-
             setUserDetails(updated);
             setEditMode({ ...editMode, [field]: false });
-           
           } catch (refreshError) {
             console.error('Token refresh failed or retry failed:', refreshError);
-            // Optionally: log out user or redirect to login
           }
         } else {
           console.error('update error:', err);
@@ -115,9 +96,6 @@ const [confirming, setConfirming] = useState(false);
 
   const handleImage = async () => {
     try {
-      console.log("inside handle image");
-      console.log("tempDetails",tempDetails)
-
       const formData = new FormData();
       formData.append('image_url', tempDetails.image_url);
   
@@ -127,24 +105,17 @@ const [confirming, setConfirming] = useState(false);
         },
         withCredentials: true,
       });
-      console.log("re.data.image_url",res.data.image_url);
-  
       // Update state with new image URL from server response
       setUserDetails((prev) => ({
         ...prev,
-        image_url: res.data.image_url, // make sure backend returns the new URL
+        image_url: res.data.image_url,
       }));
   
       setEditMode({ ...editMode, image_url: false });
     } catch (err) {
       if (err.response?.status === 401) {
         try {
-          // Try refreshing token
           await axiosInstance.post('/refresh-token', {}, { withCredentials: true });
-          
-          console.log("inside handle image");
-      console.log("tempDetails",tempDetails)
-
       const formData = new FormData();
       formData.append('image_url', tempDetails.image_url);
   
@@ -154,19 +125,15 @@ const [confirming, setConfirming] = useState(false);
         },
         withCredentials: true,
       });
-      console.log("re.data.image_url",res.data.image_url);
-  
-      // Update state with new image URL from server response
       setUserDetails((prev) => ({
         ...prev,
-        image_url: res.data.image_url, // make sure backend returns the new URL
+        image_url: res.data.image_url,
       }));
   
       setEditMode({ ...editMode, image_url: false });
          
         } catch (refreshError) {
           console.error('Token refresh failed or retry failed:', refreshError);
-          // Optionally: log out user or redirect to login
         }
       } else {
         console.error('update error:', err);
@@ -192,7 +159,6 @@ const [confirming, setConfirming] = useState(false);
     } catch (err) {
         if (err.response?.status === 403) {
           try {
-            // Try refreshing token
             await axiosInstance.post('/refresh-token', {}, { withCredentials: true });
             await axiosInstance.put(
                 `/users/put/password`,
@@ -205,7 +171,6 @@ const [confirming, setConfirming] = useState(false);
            
           } catch (refreshError) {
             console.error('Token refresh failed or retry failed:', refreshError);
-            // Optionally: log out user or redirect to login
           }
         } else {
             console.error('Failed to update password:', err);
@@ -226,23 +191,19 @@ const [confirming, setConfirming] = useState(false);
         data:{password},
         withCredentials: true,
       });
-      // Optional: log user out or redirect to home/login page
       logout();
     } catch (err) {
         if (err.response?.status === 401) {
           try {
-            // Try refreshing token
             await axiosInstance.post('/refresh-token', {}, { withCredentials: true });
             await axiosInstance.delete(`/users/delete`, {
                 data:{password},
                 withCredentials: true,
               });
-              // Optional: log user out or redirect to home/login page
               logout();
            
           } catch (refreshError) {
             console.error('Token refresh failed or retry failed:', refreshError);
-            // Optionally: log out user or redirect to login
           }
         } else {
           console.error('delete error:', err);
@@ -391,9 +352,6 @@ const [confirming, setConfirming] = useState(false);
     </div>
   )}
 </div>
-
-       
-       
 
         {/* Password */}
         <div className="profile-section">

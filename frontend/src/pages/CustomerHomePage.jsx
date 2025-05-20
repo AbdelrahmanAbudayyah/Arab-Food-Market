@@ -1,6 +1,5 @@
 import { useAuth } from '../contexts/AuthContext';
 import { useGuest } from '../contexts/GuestContext';
-
 import { useEffect, useState } from 'react';
 import axiosInstance from'../axiosInstance';
 import { useNavigate } from 'react-router-dom';
@@ -16,10 +15,8 @@ export default function CustomerHomePage() {
   const [searchCategory, setSearchCategory] = useState('state');
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
-
-
   const [currentImage, setCurrentImage] = useState(0);
+
   const images = [
     '/images/food.webp',
     '/images/food2.jpeg',
@@ -54,9 +51,8 @@ export default function CustomerHomePage() {
     if (state) params.state = state;
     if (name) params.name = name;
       const response = await axiosInstance.get('/users/chefs', {params},{
-        withCredentials: true // so cookies get sent/stored
+        withCredentials: true 
       });
-      console.log('Fetched chefs:', response.data); 
       setChefs(response.data);
     } catch (error) {
       console.error('Error fetching chefs:', error);
@@ -82,11 +78,9 @@ export default function CustomerHomePage() {
   };
 
   const getFollowing=async () =>{
-
     try{
       setLoading(true);
     const res= await axiosInstance.get('/users/following',{withCredentials:true});
-    console.log(res.data);
     setFollowingChefs(res.data);
 
     }catch (err) {
@@ -94,7 +88,6 @@ export default function CustomerHomePage() {
         try {
           await axiosInstance.post('/refresh-token', {}, { withCredentials: true });
           const res= await axiosInstance.get('/users/following',{withCredentials:true});
-           console.log(res.data);
            setFollowingChefs(res.data);
 
     } catch (refreshError) {
@@ -228,6 +221,5 @@ export default function CustomerHomePage() {
       </section>
        )}
     </div>
-     
   );
 }

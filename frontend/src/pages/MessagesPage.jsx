@@ -1,14 +1,11 @@
 import io from 'socket.io-client';
-
 import { useEffect, useState,useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import './css/messagesPage.css'
-
-
 import axiosInstance from'../axiosInstance';
 import { useParams } from 'react-router-dom';
 
-const SOCKET_URL = process.env.REACT_APP_API_URL; // change to your backend UR
+const SOCKET_URL = process.env.REACT_APP_API_URL;
 
 export default function MessagesPage(){
 
@@ -22,8 +19,6 @@ export default function MessagesPage(){
     const [message, setMessage]= useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-
-    //socket.io set up
 
     //connect when the component mounts:
     useEffect(() => {
@@ -71,28 +66,17 @@ export default function MessagesPage(){
         if (user) {
             (async () => {
                 const fetchedConversations = await getConversations();
-                console.log("fetched conversations",fetchedConversations); 
           if (id) {
-            console.log("id",id);
             (async () => {
               const conversation = await getConversationUsingParams(id,name);
-              console.log("Fetched from param:", conversation);
-
-          
               // Check if the conversation already exists in the state
                 const exists =  fetchedConversations.some((convo) => {
-                    console.log("Comparing:", convo._id, "===", conversation._id);
                     return convo._id === conversation._id;
                 });
-          
-              console.log("Exists already?", exists);
-
               if (!exists) {
                 setConversations((prev) => [conversation, ...prev]); // add to the top
-                console.log("inside conversation doesnt exit");
               }
-              
-          
+            
               setSelectedConvoId(conversation._id);
               await getMessages(conversation._id);
             })();
@@ -103,22 +87,15 @@ export default function MessagesPage(){
     
     const getConversationUsingParams= async (id,name) =>{
         try{
-
             const result = await axiosInstance.post('/chat/conversation',{receiverId:id},{withCredentials:true}) ;
             const convo= {...result.data, otherUser:{id:id,name:name}}
-           // console.log("get existed convo or create anew one ",result.data);
           return convo;
-            //return result.data; // existed conversation or a new created empty one 
-
         }catch (err) {
                   if (err.response?.status === 401) {
                     try {
                       await axiosInstance.post('/refresh-token', {}, { withCredentials: true });
-
                       const result = await axiosInstance.post('/chat/conversation',[id],{withCredentials:true}) ;
                       return result.data;
-      
-                      
                 } catch (refreshError) {
                       console.error('Token refresh failed or retry failed:', refreshError);
                     }
@@ -131,23 +108,17 @@ export default function MessagesPage(){
     const getConversations = async ()=>{
         setIsLoading(true);
         setError(null);
-
         try{
             const result = await axiosInstance.get('/chat/conversations',{withCredentials:true}) ;
-            console.log("get conversations ",result.data );
-
             setConversations(result.data);
             return(result.data);
-
         }catch (err) {
                   if (err.response?.status === 401) {
                     try {
                       await axiosInstance.post('/refresh-token', {}, { withCredentials: true });
                       const result = await axiosInstance.get('/chat/conversations',[],{withCredentials:true}) ;
-                      console.log("get conversations ",result.data );
                       setConversations(result.data); 
                       return(result.data);
-   
                 } catch (refreshError) {
                       console.error('Token refresh failed or retry failed:', refreshError);
                     }
@@ -164,13 +135,9 @@ export default function MessagesPage(){
     const getMessages = async (conversationId)=>{
         setIsLoading(true);
         setError(null);
-
         try{
             const result = await axiosInstance.get(`/chat/messages/${conversationId}`,{withCredentials:true}) ;
             setSelectedConvo(result.data);
-            console.log("convo id",conversationId);
-            console.log("messages for selected convo",result.data);
-
         }catch (err) {
                   if (err.response?.status === 401) {
                     try {
@@ -188,7 +155,6 @@ export default function MessagesPage(){
                   }
                 }finally{
                     setIsLoading(false);
-
                 }
     }
 
@@ -198,14 +164,11 @@ export default function MessagesPage(){
         try{
             const result = await axiosInstance.post('chat/message',{content:message,conversationId:selectedConvoId},{withCredentials:true}) ;
                     const newMessage=result.data.newMessage;
-                    console.log('newMessage: ',newMessage);
-
                     // Emit to socket
                       socket.current.emit('send-message', newMessage);
-
                       const newSelectedConvo = [...selectedConvo ,newMessage];
                       setSelectedConvo(newSelectedConvo);
-                      setMessage(''); // Clear input
+                      setMessage(''); 
         }catch (err) {
                   if (err.response?.status === 401) {
                     try {
@@ -213,14 +176,12 @@ export default function MessagesPage(){
 
                       const result = await axiosInstance.post('chat/message',{content:message,conversationId:selectedConvoId},{withCredentials:true}) ;
                       const newMessage=result.data.newMessage;
-                     console.log('newMessage: ',newMessage);
                     // Emit to socket
                       socket.current.emit('send-message', newMessage);
                       const newSelectedConvo = [...selectedConvo ,  {content: result.data.content}];
                       setSelectedConvo(newSelectedConvo);
-                      setMessage(''); // Clear input
+                      setMessage('');
 
-      
                 } catch (refreshError) {
                       console.error('Token refresh failed or retry failed:', refreshError);
                     }
@@ -304,8 +265,5 @@ export default function MessagesPage(){
       </div>
     
     )
-    
-    
-     
 }
 

@@ -45,11 +45,8 @@ const sendMessageController=async (req,res)=>{
         }catch(err){
             console.error('Error getting messages:', err);
             res.status(500).json({ message: 'Server error' });
-    
         }
     }
-
-
         const getConversationsController = async (req,res)=>{
              const id = req.user.id;
             try{
@@ -62,10 +59,5 @@ const sendMessageController=async (req,res)=>{
                 res.status(500).json({ message: 'Server error' });
             }
         };
-
-    //delete conversation and messages,,
-
-
-
 
 module.exports = { createOrGetConversationController,sendMessageController,getMessagesController,getConversationsController};

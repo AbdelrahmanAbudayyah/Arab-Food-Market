@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-
-
 import axiosInstance from'../axiosInstance';
 import './css/ordersPage.css';
 import OrderPopup from '../components/Order/OrderPopUp'; 
-
-
 
 export default function OrdersPage(){
     const {user} = useAuth();
@@ -19,12 +15,8 @@ export default function OrdersPage(){
     useEffect(()=>{
         if (user) {
             GetOrders();
-            {console.log(orders)}
-
         }
     },[user]);
-
-
 
     const GetOrders = async ()=>{
         try{
@@ -37,9 +29,7 @@ export default function OrdersPage(){
         else {
          res= await axiosInstance.get('/orders/get/customer');
         }
-        console.log(res.data);
         setOrders(res.data);
-
     }catch (err) {
         if (err.response?.status === 401) {
           try {
@@ -55,10 +45,8 @@ export default function OrdersPage(){
          res= await axiosInstance.get('/orders/get/customer');
         }
         setOrders(res.data);
-
           } catch (refreshError) {
             console.error('Token refresh failed or retry failed:', refreshError);
-            // Optionally: log out user or redirect to login
           }
         } else {
           console.error('get orders error:', err);
@@ -118,26 +106,19 @@ export default function OrdersPage(){
         };
 
     const getFullOrder= async(orderId)=>{
-
         try{
             const res = await axiosInstance.get(`/orders/get/${orderId}`,{},{
                 withCredentials:true,
             })
             setFullOrder(res.data);
-          
-
         }catch (err) {
             if (err.response?.status === 401) {
               try {
                 await axiosInstance.post('/refresh-token', {}, { withCredentials: true });
-
                 const res = await axiosInstance.get(`/orders/get/${orderId}`,{},{
                     withCredentials:true,
                 })
                 setFullOrder(res.data);
-            
-
-  
               } catch (refreshError) {
                 console.error('Token refresh failed or retry failed:', refreshError);
               }
@@ -147,7 +128,6 @@ export default function OrdersPage(){
           }
 
     }    
-
 
     return (
       <>
@@ -196,18 +176,7 @@ export default function OrdersPage(){
           order={fullOrder}
           handleStatus={handleStatus}
         />
-      
-
-
         </div>
       </>
     );
-    
-
-
-   
-    
-        
-   
-    
 }

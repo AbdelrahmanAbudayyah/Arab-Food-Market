@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
  function AuthProvider({ children }) {
-  const [user, setUser] = useState(null); // null = not logged in
+  const [user, setUser] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,13 +18,13 @@ const AuthContext = createContext();
   const login = (userData) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData)); // Store user data on login
-    navigate("/home"); // Redirect to customer home after login
+    navigate("/home"); 
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user"); // Remove user data on logout
-    navigate("/"); // Redirect to welcome page (page 1)
+    navigate("/");
   };
 
   return (

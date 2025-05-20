@@ -28,7 +28,6 @@ const submitOrder = async (userData) => {
 
 //a chef can decline or accept a pending order
 const declineOrAcceptOrder = async (status,orderId) => {
-    
     try {
         await mysqlPool.query("UPDATE orders SET status = ? WHERE id = ?",[status, orderId]);
         return({ message: "Order status changed successfully", status:status });
@@ -38,8 +37,6 @@ const declineOrAcceptOrder = async (status,orderId) => {
     }
 };
 
-
-//get all orders for a chef
 const getOrders4Chef = async (userId) => {
     try {
         const [rows] = await mysqlPool.query(`
@@ -56,8 +53,6 @@ const getOrders4Chef = async (userId) => {
                 users u ON o.customer_id = u.id
             WHERE 
                 o.chef_id = ?`, [userId]);
-        
-        console.log(rows);        
         return rows;
     } catch (error) {
         console.error("Error gettingOrders4Chef:", error);
@@ -93,7 +88,6 @@ const getOrders4Customers = async (userId) => {
 //get information for a specific order
 const getOrderById = async (orderId) => {
     try {
-
         const [rows] = await mysqlPool.query(
             `SELECT 
                     o.id AS order_id,
@@ -122,7 +116,7 @@ const getOrderById = async (orderId) => {
         );
 
         if (rows.length === 0) {
-            return null; // or throw an error if order not found
+            return null; 
           }
           
           const orderDetails = {
@@ -140,15 +134,11 @@ const getOrderById = async (orderId) => {
               quantity: row.item_quantity
             }))
           };
-          console.log(orderDetails);
           return orderDetails;
     } catch (error) {
         console.error("Error in gettingOrderById:", error);
         throw new Error("error in getting order by id model");
     }
 };
-
-
-
 
 module.exports= {submitOrder,declineOrAcceptOrder,getOrders4Chef,getOrders4Customers,getOrderById};

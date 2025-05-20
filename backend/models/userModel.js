@@ -6,11 +6,9 @@ const {mysqlPool} = require('../config/mysql-db');
     const {name,email,password,state,city,image_url,type,additionalData}= userData;
     try{
        await mysqlPool.query('START TRANSACTION');
-    
         const [userResult]= await mysqlPool.query(
             'INSERT INTO users (name, email, password, state, city, image_url, type) VALUES (?, ?, ?, ?, ?, ?, ?)',[name,email,password,state,city,image_url,type]
         );
-        
         const userId = userResult.insertId; 
 
         if (type === 'chef') {
@@ -85,7 +83,6 @@ const {mysqlPool} = require('../config/mysql-db');
         const{name,id}=userData;
         if(!id){
             throw new Error('User ID is required');
-
         }
         try{
             await mysqlPool.query('UPDATE users SET name = ? WHERE id = ?', [name, id]);
@@ -234,18 +231,12 @@ const {mysqlPool} = require('../config/mysql-db');
             }
           };
           
-
-
-
-    
     //get user all infromation except password
-    
     const getUserById= async(userId)=>{
         try{
             // First, get the user type
             const [users] = await mysqlPool.query('SELECT name, email, type, state, city, image_url FROM users WHERE id = ?',[userId]);
     
-            
             if(users.length ===0)
                 return null;
             let user=users[0];
@@ -254,7 +245,6 @@ const {mysqlPool} = require('../config/mysql-db');
                  const [chefDetails] = await mysqlPool.query('SELECT followers_count, bio, specialty FROM chefs WHERE user_id = ?',[userId]);
                  user = { ...user, ...chefDetails[0] }; // Merge extra details
                 }
-        
             // If the user is a customer, get extra customer details
             else{
                 const [customerDetails] = await mysqlPool.query('SELECT following_count FROM customers WHERE user_id = ?',[userId] );
@@ -265,9 +255,5 @@ const {mysqlPool} = require('../config/mysql-db');
             console.error(error);
             throw new Error("error in getting user model");}
         };
-
-
-
-
 
 module.exports= {getChefs,createUser,getUserPassword,getUserById,getFollowing,unfollowChef,getUserByEmail,deleteUser,updateUserName,updateUserPassword,updateUserImage,updateUserBio,updateUserAddress,followChef};

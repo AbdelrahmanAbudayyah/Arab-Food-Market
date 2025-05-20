@@ -1,7 +1,6 @@
 const mysql = require('mysql2/promise');
 
-const isTestEnv = process.env.NODE_ENV === 'test'; // Check if in test environment
-
+const isTestEnv = process.env.NODE_ENV === 'test'; // Check if in test or development 
 
 // MySQL Connection Pool
 const mysqlPool = mysql.createPool({

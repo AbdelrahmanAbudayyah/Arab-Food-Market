@@ -1,7 +1,6 @@
 /* create tables if they dont exist when running docker compose*/
 
 /* users */
-
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -14,7 +13,6 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 /* chefs */
-
 CREATE TABLE IF NOT EXISTS chefs (
     user_id INT PRIMARY KEY,
     bio TEXT NULL, 
@@ -25,7 +23,6 @@ CREATE TABLE IF NOT EXISTS chefs (
 
 
 /* customers */
-
 CREATE TABLE IF NOT EXISTS customers (
     user_id INT PRIMARY KEY,
     following_count INT DEFAULT 0,
@@ -33,7 +30,6 @@ CREATE TABLE IF NOT EXISTS customers (
 );
 
 /* followers */ 
-
 CREATE TABLE IF NOT EXISTS followers (
     customer_id INT NOT NULL,
     chef_id INT NOT NULL,
@@ -43,7 +39,6 @@ CREATE TABLE IF NOT EXISTS followers (
 );
 
 /* food items */ 
-
 CREATE TABLE IF NOT EXISTS food_items (
     id INT PRIMARY KEY AUTO_INCREMENT,
     chef_id INT NOT NULL,
@@ -51,7 +46,6 @@ CREATE TABLE IF NOT EXISTS food_items (
     description TEXT NULL,
     price DECIMAL(10,2) NOT NULL,
     category VARCHAR(255) NOT NULL,
-
     image_url VARCHAR(255) NULL,
     FOREIGN KEY (chef_id) REFERENCES chefs(user_id) ON DELETE CASCADE
 );
@@ -59,7 +53,6 @@ CREATE TABLE IF NOT EXISTS food_items (
 
 
 /* orders */
-
 CREATE TABLE IF NOT EXISTS orders (
     id INT PRIMARY KEY AUTO_INCREMENT,
     customer_id INT NOT NULL,
@@ -72,7 +65,6 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 
 /* order items */
-
 CREATE TABLE IF NOT EXISTS order_food (
     order_id INT NOT NULL,
     food_id INT NOT NULL,

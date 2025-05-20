@@ -3,9 +3,6 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-
-
-
 import axiosInstance from'../axiosInstance';
 import './css/chefMenu.css';
 
@@ -20,25 +17,19 @@ export default function ChefMenu() {
   const { user } = useAuth();
   let total;
 
-
   useEffect(() => {
     fetchChefDetails();
   }, []);
   
-
   const fetchChefDetails = async () => {
     try {
-        console.log(id);
       const res1 = await axiosInstance.get(`/users/user/${id}`,{
-        withCredentials: true // so cookies get sent/stored
+        withCredentials: true
       });
-      console.log(res1);
       setChef(res1.data);
-
       const res2 = await axiosInstance.get(`/foodItems/get/${id}`,{
-        withCredentials: true // so cookies get sent/stored
+        withCredentials: true 
       });
-      console.log(res2);
       setFoodItems(res2.data);
     } catch (err) {
       console.error('Error fetching chef details', err);
@@ -69,7 +60,7 @@ export default function ChefMenu() {
   
     try {
       const res = await axiosInstance.post('/orders/add', orderdata, {
-        withCredentials: true, // to send cookies
+        withCredentials: true, 
       });
   
       setCart([]);
@@ -79,10 +70,8 @@ export default function ChefMenu() {
     } catch (err) {
       if (err.response?.status === 401) {
         try {
-          // Try refreshing token
           await axiosInstance.post('/refresh-token', {}, { withCredentials: true });
-  
-          // Retry the original request (POST, not GET)
+
           const retryRes = await axiosInstance.post('/orders/add', orderdata, {
             withCredentials: true,
           });
@@ -90,11 +79,8 @@ export default function ChefMenu() {
           setCart([]);
           toast.success('✅ Order placed successfully!');
           setShowCart(false);
-          
-          console.log('Retry success:', retryRes);
-        } catch (refreshError) {
+       } catch (refreshError) {
           console.error('Token refresh failed or retry failed:', refreshError);
-          // Optionally: log out user or redirect to login
         }
       } else {
         console.error('Order submit error:', err);
@@ -102,29 +88,20 @@ export default function ChefMenu() {
     }
   };
   
-
   const followChef= async()=>{
     try {
-
       const res = await axiosInstance.post(`/users/follow/${id}`,{},{
-      withCredentials: true // so cookies get sent/stored
-    });
-    console.log('Followed successfully:', res.data);
-  
+      withCredentials: true 
+    });  
   } catch (err) {
     if (err.response?.status === 403) {
       try {
-        // Try refreshing token
         const res =await axiosInstance.post('/refresh-token', {}, { withCredentials: true });
-
-        // Retry the original request (POST, not GET)
         const retryRes = await axiosInstance.post(`/users/follow/${id}`,{},{
-          withCredentials: true // so cookies get sent/stored
+          withCredentials: true 
         });
-        console.log('Retry success:', retryRes.data);
       } catch (refreshError) {
         console.error('Token refresh failed or retry failed:', refreshError);
-        // Optionally: log out user or redirect to login
       }
     } else {
       console.error('follow chef error:', err.response);
@@ -162,8 +139,8 @@ export default function ChefMenu() {
       )}
 
       {/* Food Items */}
-       
-      <div className="food-menu">
+  
+  <div className="food-menu">
   <h3 className='menu'>Menu</h3>
   {['main', 'side', 'dessert'].map(section => {
     const sectionItems = foodItems.filter(item => item.category === section);

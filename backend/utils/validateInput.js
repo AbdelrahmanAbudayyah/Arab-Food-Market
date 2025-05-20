@@ -32,15 +32,11 @@ const{getUserById}= require('../models/userModel');
 const validateOrderData = (total,items)=>{
 
   if (!total || !items || !Array.isArray(items) || items.length === 0) {
-    console.log(total);
-    console.log(items[0]);
-
     throw new Error("Missing required fields"); 
   }
   for (const item of items) {
     const { id, quantity } = item;
     if (!id || !quantity) {
-      console.log({id},':',quantity);
       throw new Error("Each item must have a food_id and quantity");
     }
   }
@@ -52,16 +48,13 @@ const validateFoodData = (userData) => {
   const { name,price,category } = userData;
 
   if (!name || !price) {
-    console.log(name,price);
     throw new Error('Missing required fields');
   }
-  
   return true; 
 };
 
 const validateIfUserExist = async(userId)=>{
   try{
-    console.log("userid: " , userId);
   const user = await getUserById(userId);
   if(!user)
     throw new Error('user not found');
@@ -72,17 +65,14 @@ const validateIfUserExist = async(userId)=>{
 };
 
 const validateIfOrderExist = async(orderId)=>{
-
 try {
   const [result] = await mysqlPool.query("select id from orders where id = ? ",[orderId]);
-
 if(result.length == 0){
   throw new Error('order not found');
 }
 } catch (error) {
   console.error(error);
   throw new Error('order not found');    
-  
 }
 
 };
