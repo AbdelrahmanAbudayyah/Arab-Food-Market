@@ -228,3 +228,18 @@
   }
 }
 
+@media (max-width: 480px) {
+  .menu {
+    font-size: 1.5rem;
+  }
+
+  .menu-section-title {
+    font-size: 1.1rem;
+  }
+
+  .cart-popup {
+    width: 90%;
+    left: 5%;
+    transform: none;
+  }
+}

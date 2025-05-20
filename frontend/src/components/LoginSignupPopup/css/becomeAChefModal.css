@@ -102,3 +102,55 @@
 .become-chef-form button:hover {
   background-color: #515151; 
 }
+
+/* Responsive for tablets and smaller */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .modal-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .become-chef-form button {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+
+  .become-chef-form input,
+  .become-chef-form textarea {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+}
+
+/* Responsive for phones */
+@media (max-width: 400px) {
+  .modal-content {
+    padding: 1rem;
+    max-width: 95%;
+  }
+
+  .modal-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .close-button {
+    font-size: 1.2rem;
+    top: 8px;
+    right: 8px;
+  }
+
+  .become-chef-form button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .become-chef-form input,
+  .become-chef-form textarea {
+    font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+}

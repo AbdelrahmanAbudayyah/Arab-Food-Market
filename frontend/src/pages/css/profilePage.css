@@ -132,3 +132,80 @@ body, html {
     background-color: rgb(43, 0, 0);
   }
   
+
+  @media (max-width: 768px) {
+    .background-wrapper {
+      padding-top: 60px; /* Less top padding on small screens */
+      align-items: center; /* Center card vertically on mobile if you want */
+    }
+  
+    .profile-card {
+      width: 90%; /* Make card width responsive */
+      padding: 1.2rem;
+    }
+  
+    .profile-name {
+      font-size: 1.4rem;
+    }
+  
+    .profile-bio,
+    .profile-location {
+      font-size: 0.9rem;
+    }
+  
+    .profile-image {
+      width: 100px;
+      height: 100px;
+    }
+  
+    button {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+    }
+  
+    input[type="text"],
+    input[type="password"],
+    textarea {
+      font-size: 0.9rem;
+    }
+  }
+  
+
+
+  @media (max-width: 428px) {
+    .background-wrapper {
+      padding-top: 60px; /* Less top padding on small screens */
+      align-items: center; /* Center card vertically on mobile if you want */
+    }
+  
+    .profile-card {
+      width: 90%; /* Make card width responsive */
+      padding: 1.2rem;
+    }
+  
+    .profile-name {
+      font-size: 1.4rem;
+    }
+  
+    .profile-bio,
+    .profile-location {
+      font-size: 0.9rem;
+    }
+  
+    .profile-image {
+      width: 100px;
+      height: 100px;
+    }
+  
+    button {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+    }
+  
+    input[type="text"],
+    input[type="password"],
+    textarea {
+      font-size: 0.9rem;
+    }
+  }
+  

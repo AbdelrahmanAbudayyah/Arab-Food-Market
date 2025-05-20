@@ -119,29 +119,10 @@
   background-color: #eee;
 }
 
-  
-  
 
-
-
-
-
-
-
-
-
-
-
-
-
-  
   .food-card button:last-child {
     background-color: #cc0000;
   }
-  
-
-
-  
  
 
   .edit-button{
@@ -150,4 +131,140 @@
   }
   
 
+  @media (max-width: 768px) {
+    .chef-menu {
+      padding-top: 5vh;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  
+    .chef-profile {
+      padding: 10px;
+      text-align: center;
+    }
+  
+    .chef-header {
+      font-size: 1.5rem;
+    }
+  
+    .chef-bio {
+      font-size: 0.95rem;
+      padding: 0 10px;
+    }
+  
+    .chef-followers {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+  
+    .chef-image {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .add-food-form {
+      margin-top: 20px;
+      padding: 0 10px;
+    }
+  
+    .menu {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  
+    .menu-section-title {
+      font-size: 1.2rem;
+    }
+  
+    .food-carousel {
+      gap: 0.75rem;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  
+    .food-card {
+      flex: 0 0 180px;
+      min-width: 160px;
+      padding: 0.75rem;
+    }
+  
+    .food-card img.food-img {
+      height: 120px;
+    }
+  
+    .food-card button {
+      padding: 0.3rem 0.5rem;
+      font-size: 0.85rem;
+    }
+  }
+  
+
+  @media (max-width: 428px) {
+    .chef-menu {
+      padding-top: 5vh;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  
+    .chef-profile {
+      padding: 10px;
+      text-align: center;
+    }
+  
+    .chef-header {
+      font-size: 1.5rem;
+    }
+  
+    .chef-bio {
+      font-size: 0.95rem;
+      padding: 0 10px;
+    }
+  
+    .chef-followers {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+  
+    .chef-image {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .add-food-form {
+      margin-top: 20px;
+      padding: 0 10px;
+    }
+  
+    .menu {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  
+    .menu-section-title {
+      font-size: 1.2rem;
+    }
+  
+    .food-carousel {
+      gap: 0.75rem;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  
+    .food-card {
+      flex: 0 0 180px;
+      min-width: 160px;
+      padding: 0.75rem;
+    }
+  
+    .food-card img.food-img {
+      height: 120px;
+    }
+  
+    .food-card button {
+      padding: 0.3rem 0.5rem;
+      font-size: 0.85rem;
+    }
+  }
   

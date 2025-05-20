@@ -88,3 +88,51 @@ textarea {
   border-radius: 8px;
   margin-bottom: 0.5rem;
 }
+
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 15px 20px;
+    max-width: 90%;
+  }
+
+  .close-modal {
+    font-size: 1.3rem;
+    top: 8px;
+    right: 8px;
+  }
+
+  input, textarea, select {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .small-button {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .modal-content {
+    padding: 10px 15px;
+    max-width: 95%;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  input, textarea, select {
+    font-size: 0.85rem;
+    padding: 6px;
+  }
+
+  .close-modal {
+    font-size: 1.1rem;
+  }
+
+  .small-button {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+}

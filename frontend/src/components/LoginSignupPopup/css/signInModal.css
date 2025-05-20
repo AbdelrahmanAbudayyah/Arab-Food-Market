@@ -85,3 +85,53 @@
   background-color: #515151; /* Slightly darker gold on hover */
 }
 
+
+/* Responsive for tablets and smaller */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+
+  .signIn {
+    font-size: 1.5rem;
+  }
+
+  .sign-in-form button {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+
+  .sign-in-form input {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+}
+
+/* Responsive for phones */
+@media (max-width: 400px) {
+  .modal-content {
+    max-width: 95%;
+    padding: 1rem;
+  }
+
+  .signIn {
+    font-size: 1.2rem;
+  }
+
+  .close-button {
+    font-size: 1.2rem;
+    top: 8px;
+    right: 8px;
+  }
+
+  .sign-in-form button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .sign-in-form input {
+    font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+}

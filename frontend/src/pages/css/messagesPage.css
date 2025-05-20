@@ -155,3 +155,89 @@
 .message-content {
   margin-bottom: 5px;
 }
+
+
+@media (max-width: 768px) {
+  .messages-page {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .messages_sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  .chat-window {
+    padding: 10px;
+  }
+
+  .message-input input {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .message-input button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .message-bubble {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .messages_sidebar h2 {
+    font-size: 18px;
+  }
+
+  .select-conversation {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}
+
+
+@media (max-width: 428px) {
+  .messages-page {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .messages_sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  .chat-window {
+    padding: 10px;
+  }
+
+  .message-input input {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .message-input button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .message-bubble {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .messages_sidebar h2 {
+    font-size: 18px;
+  }
+
+  .select-conversation {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}

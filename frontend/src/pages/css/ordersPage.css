@@ -35,3 +35,45 @@
   color: #555;
   margin: 0;
 }
+
+
+@media (max-width: 768px) {
+  .orders {
+    padding: 10px;
+    margin-top: 50px;
+  }
+
+  .order-card {
+    padding: 12px;
+    margin: 8px 0;
+  }
+
+  .order-detail strong {
+    font-size: 13px;
+  }
+
+  .order-detail p {
+    font-size: 14px;
+  }
+}
+
+
+@media (max-width: 428px) {
+  .orders {
+    padding: 10px;
+    margin-top: 50px;
+  }
+
+  .order-card {
+    padding: 12px;
+    margin: 8px 0;
+  }
+
+  .order-detail strong {
+    font-size: 13px;
+  }
+
+  .order-detail p {
+    font-size: 14px;
+  }
+}

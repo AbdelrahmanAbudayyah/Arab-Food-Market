@@ -77,3 +77,53 @@
 .change-location-btn:hover {
   background-color: #FFC300; /* Brighter gold hover */
 }
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    padding: 60px 15px 15px 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
+  .sidebar-menu li {
+    margin: 15px 0;
+    font-size: 16px;
+  }
+
+  .sidebar-menu a {
+    font-size: 16px;
+  }
+
+  .location-filter {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .location-filter input {
+    padding: 5px;
+    font-size: 14px;
+  }
+
+  .change-location-btn {
+    padding: 6px;
+    font-size: 14px;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .sidebar {
+    width: 180px;
+    padding: 50px 10px 10px 10px;
+  }
+
+  .sidebar-menu a {
+    font-size: 15px;
+  }
+
+  .change-location-btn {
+    font-size: 13px;
+  }
+}
