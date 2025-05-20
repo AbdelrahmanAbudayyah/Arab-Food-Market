@@ -14,6 +14,13 @@
     height: 200px; /* shorter on small screens */
   }
 
+  .chef-card {
+    flex: 0 0 80%;      /* Make cards wider to better fit narrow screens */
+    min-width: auto;    /* Remove min-width restriction */
+    margin: 0 auto 1rem auto; /* Center cards with some bottom spacing */
+    padding: 0.8rem;    /* Slightly reduce padding */
+  }
+
   .slide-image {
     height: 200px;
   }
@@ -202,4 +209,50 @@
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 0.5rem;
+}
+
+
+/* iPhone Pro Max specific tweaks */
+@media (max-width: 428px) {
+  .hero-section {
+    height: 180px; /* slightly shorter for iPhone Pro Max */
+  }
+
+  .slide-image {
+    height: 180px;
+  }
+
+  .hero-overlay {
+    bottom: 12px;
+    width: 95%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .search-left, .search-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-input,
+  .search-select,
+  .search-button,
+  .reset-button {
+    width: 100%;
+    max-width: 280px;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .chef-card {
+    flex: 0 0 95%;      /* Nearly full width on very small screens */
+    padding: 0.6rem;
+    font-size: 0.9rem;
+
+  }
 }
